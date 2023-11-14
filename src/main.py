@@ -7,7 +7,7 @@ from utils.utils import load_data, evaluate_performance
 
 def main():
     # Load MIP-PET images
-    images = load_data('data/mip_pet_images')
+    images = load_data('data/patients/imgs')
 
     # Preprocess images using MONAI
     preprocessed_images = preprocess(images)

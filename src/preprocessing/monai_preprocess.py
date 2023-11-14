@@ -1,9 +1,11 @@
 # Import necessary libraries
 import monai
-from monai.transforms import Compose, LoadImaged, AddChanneld, ScaleIntensityd, ToTensord, RandRotate90d, RandFlipd, RandZoomd, ResizeWithPadOrCropd
+import numpy as np
+from monai.transforms import Compose, LoadImaged, AddChanneld, ScaleIntensityd, ToTensord, ResizeWithPadOrCropd
 
 # Define keys
-keys = ['image', 'label']
+keys = ['imgs', 'label']
+
 
 # Define the preprocessing function
 def preprocess(data_path, keys):
@@ -18,6 +20,9 @@ def preprocess(data_path, keys):
     # Load the data
     data = LoadImaged(keys)(data_path)
 
+    # Convert 3D PET images to 2D MIP-PET images
+    data['imgs'] = np.max(data['imgs'], axis=1)
+
     # Define the transformations
     transforms = Compose([
         # Add an additional channel
@@ -25,13 +30,7 @@ def preprocess(data_path, keys):
         # Normalize the intensity
         ScaleIntensityd(keys),
         # Resize or crop the image
-        ResizeWithPadOrCropd(keys, (96, 96, 96)),
-        # Randomly rotate the image
-        RandRotate90d(keys, prob=0.5, spatial_axes=(0, 2)),
-        # Randomly flip the image
-        RandFlipd(keys, spatial_axis=0),
-        # Randomly zoom the image
-        RandZoomd(keys, prob=0.5, min_zoom=0.9, max_zoom=1.1),
+        ResizeWithPadOrCropd(keys, (400, 991)),
         # Convert the image to a tensor
         ToTensord(keys)
     ])

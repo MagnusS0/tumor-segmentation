@@ -210,3 +210,12 @@ poetry.toml
 
 # LSP config files
 pyrightconfig.json
+
+# Ignore data folder
+data/
+
+# Ignore logs folder
+logs/
+
+# temporary files
+*.tmp
