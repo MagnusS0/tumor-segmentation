@@ -12,7 +12,7 @@ class TestAttentionUnetModel(unittest.TestCase):
 
     def test_preprocess(self):
         # Test preprocessing function
-        img = np.random.rand(4, 256, 256)
+        img = np.random.rand(256, 256, 4)
         preprocessed_img = self.model.preprocess(img)
         self.assertEqual(preprocessed_img.shape, (4, 256, 256))
         self.assertTrue(torch.is_tensor(preprocessed_img))
