@@ -219,3 +219,6 @@ logs/
 
 # temporary files
 *.tmp
+
+# Ignore output folder
+output/
