@@ -1,70 +1,30 @@
-# Tumor Segmentation Project with MONAI
+# Tumor Segmentation Project 🧬🖥️
 
-This project aims to segment tumors from Whole-body MIP-PET images using U-Net, V-Net, and potentially LFBNet models. The project uses MONAI for preprocessing and data augmentation. The performance of the models is evaluated using the Sørensen-Dice coefficient.
+## Introduction
+This Tumor Segmentation project, was created for DM i AI 2023 - Denmark's AI competition for students. It focuses on segmenting tumors from whole-body MIP-PET images.
+An `Attention U-Net` model will for each pixel in the image, the model predicts whether it belongs to a tumor or a healthy area.
 
-## Getting Started
+The project included a lot of learning and a model I never used before so it's by far perfect and although I couldn't race against the clock to test my model in the competition, I think it does a pretty decent job. Achving a Dice-Score of `0.86` on the validation set with only cancer cases. Post-competition, I added a Streamlit app that takes this project from competition entry to a small app to play around with.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+## Project Structure 📂
 
-### Prerequisites
+This project has a simplestructure:
 
-- Python 3.8 or higher
-- Poetry for Python dependency management
+- `experimentation`: Contains Jupyter notebooks like `experimenting.ipynb` where the model is trained and validated.
+- `src`:
+  - `app`: Houses the Streamlit application (`app.py`)
+  - `model`: Includes the `attention_unet.py` (the model architecture and infrens method) and the trained model file `best_metric_model_segmentation2d_dict.pth`.
+  - `tests`: For any future testing and validation scripts.
+- Root Directory: Contains essential files like `.gitignore`, `README.md` and configuration files (`poetry.lock`, `pyproject.toml`) for dependency management.
 
-### Installing
+## Approach
 
-1. Clone the repository to your local machine.
 
-```bash
-git clone https://github.com/yourusername/tumor-segmentation.git
-```
+- **Research**: Explored academic resources to find effective segmentation methods. This led to the MONAI library and the Attention U-Net model.
 
-2. Navigate to the project directory.
+- **Refinement**: Ihe implementation of the DiceFocal loss function, inspired by a [study on Whole-Body MIP-PET Imaging](https://aapm.onlinelibrary.wiley.com/doi/10.1002/mp.16438). This significantly improved model accuracy, especially in segmenting smaller tumor sections.
 
-```bash
-cd tumor-segmentation
-```
-
-3. Install the project dependencies using Poetry.
-
-```bash
-poetry install
-```
-
-## Running the Project
-
-1. Activate the Poetry environment.
-
-```bash
-poetry shell
-```
-
-2. Run the main script.
-
-```bash
-python src/main.py
-```
-
-## Project Structure
-
-The project has the following structure:
-
-- `src/main.py`: Main script that runs the entire pipeline.
-- `src/models/`: Contains the implementation of the U-Net, V-Net, and LFBNet models.
-- `src/preprocessing/monai_preprocess.py`: Contains the preprocessing steps using MONAI.
-- `src/utils/utils.py`: Contains utility functions used throughout the project.
-- `src/tests/test_models.py`: Contains tests for the models.
-- `data/mip_pet_images`: Directory containing the MIP-PET images used for training and testing the models.
-- `poetry.lock` and `pyproject.toml`: Used by Poetry for dependency management.
-
-## Testing
-
-To run the tests for the models, navigate to the `src/tests` directory and run the `test_models.py` script.
-
-```bash
-cd src/tests
-python test_models.py
-```
+In essence, this project was a blend of research, practical implementation, and a lot of trail an error.
 
 ## Built With
 
@@ -73,7 +33,7 @@ python test_models.py
 
 ## Authors
 
-- Your Name
+- @MagnusS0 
 
 ## License
 
