@@ -3,8 +3,6 @@ import os
 import tempfile
 from PIL import Image
 from io import BytesIO
-import sys
-sys.path.insert(0, '/home/magsam/workspace/tumor-segmentation/src')
 from model.attention_unet import AttentionUnetModel
 
 
@@ -31,7 +29,7 @@ st.sidebar.write("Please upload a MIP-PET image in PNG or JPG format. The maximu
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
 # Assuming the AttentionUnetModel class is defined as per your previous code
-model = AttentionUnetModel(model_path="./model/best_metric_model_segmentation2d_dict.pth")
+model = AttentionUnetModel(model_path="src/model/best_metric_model_segmentation2d_dict.pth")
 
 def convert_image(img):
     buf = BytesIO()
