@@ -17,7 +17,7 @@ And a worse example:
 ## Approach
 
 
-- **Research**: The choice of the Attention U-Net model was driven by researching diffrent segmentation methods in medical imaging. I quickly found that Attention U-Net's where one of the top performers on benchmarks such as PapersWithCode's [Image Segmentation](https://paperswithcode.com/task/image-segmentation) and [Tumor Segmentation](https://paperswithcode.com/task/tumor-segmentation) lists. This architecture, as detailed in the paper [Attention U-Net: Learning Where to Look for the Pancreas](https://arxiv.org/abs/1804.03999), is good at isolating critical features within medical images, and can be used to replace external organ localization models. This is crucial in MIP-PET, where organs like the brain, liver, bladder, and kidneys often exhibit high sugar uptake, resembling tumor characteristics. This is done through self-Attention Gates (AGs). In essence, these AGs selectively focus on relevant spatial regions, filtering out background noise and irrelevant features. So through training the model will e.g. start focusing away from organ areas and focuse it's attention on more commen tumor regions. 
+- **Research**: The choice of the Attention U-Net model was driven by researching diffrent segmentation methods in medical imaging. I quickly found that Attention U-Net's were one of the top performers on benchmarks such as PapersWithCode's [Image Segmentation](https://paperswithcode.com/task/image-segmentation) and [Tumor Segmentation](https://paperswithcode.com/task/tumor-segmentation) lists. This architecture, as detailed in the paper [Attention U-Net: Learning Where to Look for the Pancreas](https://arxiv.org/abs/1804.03999), is good at isolating critical features within medical images, and can be used to replace external organ localization models. This is crucial in MIP-PET, where organs like the brain, liver, bladder, and kidneys often exhibit high sugar uptake, resembling tumor characteristics. This is done through self-Attention Gates (AGs). In essence, these AGs selectively focus on relevant spatial regions, filtering out background noise and irrelevant features. So through training, the model will e.g. start focusing away from organ areas and focuse it's attention on more commen tumor regions. 
 
 - **Refinement**: Implementing the DiceFocal loss function was inspired by a [study on Whole-Body MIP-PET Imaging](https://aapm.onlinelibrary.wiley.com/doi/10.1002/mp.16438), which highlighted the challenges in detecting smaller tumors. This adjustment significantly enhanced model precision, as it focuses the model more on the hard, misclassified examples and less on the easy, well-classified examples (like the large areas without tumors). This is refelcted in the lambda values set to 1 for Dice and 10 for Focal, adopted from the paper.
   
@@ -25,14 +25,23 @@ In essence, this project was a blend of research, practical implementation, and 
 
 ## Project Structure 📂
 
-This project has a simplestructure:
-
 - `experimentation`: Contains Jupyter notebooks like `experimenting.ipynb` where the model is trained and validated.
 - `src`:
   - `app`: Houses the Streamlit application (`app.py`)
   - `model`: Includes the `attention_unet.py` (the model architecture and infrens method) and the trained model file `best_metric_model_segmentation2d_dict.pth`.
-  - `tests`: For any future testing and validation scripts.
 - Root Directory: Contains essential files like `.gitignore`, `README.md` and configuration files (`poetry.lock`, `pyproject.toml`) for dependency management.
+
+## Run it 🐋
+
+The Streamlit app has been dockerized.
+
+To run it build the image and start up a container.
+```bash
+docker build -t <image-name> .
+
+docker run -p 8501:8501 --name <container-name> <image-name>
+```
+
 
 ## Built With
 
