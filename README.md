@@ -1,10 +1,18 @@
 # Tumor Segmentation Project 🧬🖥️
 
-## Introduction
 This Tumor Segmentation project, was created for [DM i AI 2023](https://github.com/amboltio/DM-i-AI-2023/tree/main/tumor-segmentation) - Denmark's AI competition for students. It focuses on segmenting tumors from whole-body MIP-PET images.
 An `Attention U-Net` model will for each pixel in the image, predict whether it belongs to a tumor or a healthy area.
 
-The project included a lot of learning and a model I never used before so it's by far perfect. I couldn't race against the clock to test my model in the competition, but it achving a Dice-Score of `0.84` on the validation set with only cancer cases. On a proper test set I assume the score would be lower. Post-competition, I added a small Streamlit app to test how the model could work in a real setting.
+The project included a lot of learning and a model I never used before so it's by far perfect. I couldn't race against the clock to test my model in the competition, but it achving a Dice-Score of `0.84` on the validation set. On a proper test set I assume the score would be lower due to lack of generalization. Post-competition, I added a small Streamlit app to test how the model could work in a real setting.
+
+An example prediction:
+![image](https://github.com/MagnusS0/tumor-segmentation/assets/97634880/1d97555f-3f3c-4a64-96d6-13ff1bec5426)
+
+And a worse example:
+![image](https://github.com/MagnusS0/tumor-segmentation/assets/97634880/20c15804-b567-4094-aa4d-d69be121681e)
+
+
+
 
 ## Approach
 
