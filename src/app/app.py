@@ -24,7 +24,7 @@ st.markdown("""
 """)
 # Set up the sidebar with instructions and file uploader
 st.sidebar.header("Upload and Process Image :gear:")
-st.sidebar.write("Please upload a MIP-PET image in PNG or JPG format. The maximum file size is 5MB.")
+st.sidebar.write("Please upload a MIP-PET image in PNGformat. The maximum file size is 5MB.")
 
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
@@ -44,8 +44,6 @@ def process_image(upload):
     try:
         image = Image.open(upload)
         col1.image(image)
-
-
 
         # Process the image with the model
         processed = model.infer(tmpfile_path)
